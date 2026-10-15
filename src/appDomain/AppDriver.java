@@ -1,5 +1,10 @@
 package appDomain;
 
+import java.util.Comparator;
+
+import products.Products;
+import utilities.*;
+
 /**
  * <p>
  * This application driver code is designed to be used as a basis for the
@@ -17,7 +22,39 @@ public class AppDriver
 	 */
 	public static void main( String[] args )
 	{
+		
+		//Temp switch case structure for placeholder sorting algorithms
+		
+		switch (args) {
 
+	    case "b":
+	        // BubbleSort.sort(products, comparator);
+	    	break;
+
+	    case "i":
+	        // InsertionSort.sort(products, comparator);
+	    	break;
+
+	    case "s":
+	        // SelectionSort.sort(products, comparator);
+	    	break;
+
+	    case "m":
+	        // MergeSort.sort(products, comparator);
+	    	break;
+
+	    case "q":
+	        // Median-of-Three Quick Sort
+	        break;
+
+	    case "z":
+	        // CustomSort.sort(products, comparator);
+	    	break;
+
+	    default:
+	        throw new IllegalArgumentException(
+	            "Invalid sorting algorithm: ");
+		}
 	}
 
 }
