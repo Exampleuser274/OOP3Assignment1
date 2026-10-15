@@ -66,7 +66,7 @@ public abstract class Products implements Comparable<Products> {
      * Compares this product against another product
      * using their calculated real differences.
      *
-     * @param "other" is the product to compare against.
+     * @param other is the product to compare against.
      * @return Negative if this product is smaller, zero if equal, positive if greater.
      * 
      */
