@@ -25,7 +25,7 @@ public class AppDriver
 		
 		//Temp switch case structure for placeholder sorting algorithms
 		
-		switch (args) {
+		switch (args[0]) {
 
 	    case "b":
 	        // BubbleSort.sort(products, comparator);
