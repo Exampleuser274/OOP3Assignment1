@@ -390,7 +390,7 @@ public class AppDriver {
                 break;
 
             default:
-                valueLabel = "Calculated Difference:";
+                valueLabel = "Real Difference:";
         }
 
         // Display every product when there are 10 or fewer.
