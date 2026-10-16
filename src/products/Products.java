@@ -54,7 +54,7 @@ public abstract class Products implements Comparable<Products> {
 
     /**
      * Calculates the adjusted absolute price difference.
-     * * This is abstract because each product will use its 
+     * This is abstract because each product will use its 
      * own method to calculate the difference between products
      * 
      * @return The calculated real difference.
