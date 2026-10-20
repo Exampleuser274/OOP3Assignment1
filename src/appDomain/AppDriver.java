@@ -1,3 +1,31 @@
+/**
+ * <p>
+ * CPRG 304 - Object-Oriented Programming 3
+ * Assignment 1: Complexity and Sorting
+ *
+ * Group Members:
+ * Patrick Bouley
+ * Alexander Kovach
+ * Rnel Gem Macatuno
+ * Oluwatofunmi Dorcas Olutimehin
+ *
+ * Date: October 23, 2026
+ *
+ * Description:
+ * This application reads product information from external text files
+ * and sorts the products in descending order using one of six
+ * sorting algorithms selected through command-line arguments.
+ *
+ * Products can be compared by their original price, updated price,
+ * or calculated real price difference using the Comparable and
+ * Comparator interfaces.
+ *
+ * The application benchmarks the selected sorting algorithm and
+ * displays the sorted results according to the assignment requirements.
+ * </p>
+ */
+
+
 package appDomain;
 
 import java.io.BufferedReader;
@@ -11,14 +39,24 @@ import products.*;
 import utilities.*;
 
 /**
- * <p>
- * This application driver code is designed to be used as a basis for the
- * Complexity and Sorting assignment that will be developed in the CPRG304 
- * class at SAIT. The implementors of this applications will be required
- * to add all the correct functionality.
- * </p>
+ * Main application driver for the CPRG 304
+ * Complexity and Sorting assignment.
+ *
+ * Processes command-line arguments to determine the input file,
+ * comparison type, and sorting algorithm.
+ *
+ * Reads product records from external text files and creates
+ * the appropriate product objects.
+ *
+ * Uses Comparable and Comparator implementations to sort
+ * products in descending order with one of six algorithms.
+ *
+ * Measures the execution time of the selected sorting algorithm
+ * and displays the results according to the assignment requirements.
  */
+
 public class AppDriver {
+	
 	/**
 	 *  The main method is the entry point of the application.
 	 *  
@@ -37,6 +75,18 @@ public class AppDriver {
         }
     }
 
+    /**
+     * Processes command-line arguments, loads product data,
+     * selects the comparison type and sorting algorithm,
+     * measures sorting execution time, and displays the results.
+     *
+     * @param args Command-line arguments specifying the input file,
+     *             comparison type, and sorting algorithm.
+     * @throws IOException If the input file cannot be read.
+     * @throws IllegalArgumentException If an argument or
+     *                                  product record is invalid.
+     */
+    
     private static void runApplication(String[] args)
             throws IOException {
 
@@ -196,21 +246,33 @@ public class AppDriver {
         double elapsedMilliseconds =
             (endTime - startTime) / 1_000_000.0;
 
-        // Display products after the timer has stopped.
         displayProducts(products, compareType);
 
         // Display the correct algorithm name and run time.
         String algorithmName = getAlgorithmName(sortAlgorithm);
 
-        System.out.printf(
-            Locale.ROOT,
-            "%s run time was: %.0f milliseconds%n",
-            algorithmName,
-            elapsedMilliseconds
-        );
+        // Display runtime to three decimal places so any sorting operations 
+        // under 1 second are not rounded to 0 milliseconds.
+        	System.out.printf(
+	            Locale.ROOT, 
+	            "%s run time was: %.3f milliseconds%n",
+	            algorithmName, 
+	            elapsedMilliseconds );
     }
 
-    /* Returns the name of the selected sorting algorithm. */
+
+/**
+ * Returns the full name of the selected sorting algorithm.
+ *
+ * Converts the single-character sorting option into a
+ * readable name for displaying the benchmark results.
+ *
+ * @param sortAlgorithm The selected sorting option
+ *                      (b, i, s, m, q, or z).
+ * @return The name of the selected sorting algorithm,
+ *         or "Unknown Sort" if the option is not recognized.
+ */
+
     private static String getAlgorithmName(String sortAlgorithm) {
         switch (sortAlgorithm) {
             case "b":
@@ -230,12 +292,17 @@ public class AppDriver {
         }
     }
 
-    /*
-     * Reads products from a text file.
-     * The first line contains the product count.
-     * Each remaining line contains a product type,
-     * original price, and updated price.
+    /**
+     * Reads product records from the specified text file.
+     * The first line determines the size of the Products array.
+     * Each subsequent line contains a product type and two prices.
+     *
+     * @param fileName The path to the input file.
+     * @return An array containing the products from the file.
+     * @throws IOException If the file cannot be read.
+     * @throws IllegalArgumentException If the file contains invalid data.
      */
+    
     private static Products[] readProducts(String fileName)
             throws IOException {
 
@@ -331,7 +398,24 @@ public class AppDriver {
         }
     }
 
-    /* Creates the appropriate product subclass. */
+
+/**
+ * Creates a product object based on the product type
+ * provided in the input file.
+ *
+ * Uses a switch statement to determine which of the
+ * seven product subclasses should be instantiated.
+ * The product type comparison is case-insensitive.
+ *
+ * @param type The product type read from the file.
+ * @param originalPrice The original price of the product.
+ * @param updatedPrice The updated price of the product.
+ * @return A Products object representing the appropriate
+ *         product subclass.
+ * @throws IllegalArgumentException If the product type
+ *                                  is not recognized.
+ */
+
     private static Products createProduct(
             String type,
             double originalPrice,
@@ -366,7 +450,17 @@ public class AppDriver {
         }
     }
 
-    /* Displays products using the assignment's output rules. */
+    /**
+     * Displays selected elements of the sorted product array.
+     *
+     * Displays all products when the array contains 10 or fewer
+     * elements. For larger arrays, displays the first, last,
+     * and every 100th or 1000th element as required.
+     *
+     * @param products The sorted array of products.
+     * @param compareType The comparison type: o, u, or d.
+     */
+    
     private static void displayProducts(
             Products[] products,
             String compareType) {
@@ -392,8 +486,7 @@ public class AppDriver {
             default:
                 valueLabel = "Real Difference:";
         }
-
-        // Display every product when there are 10 or fewer.
+        
         if (n <= 10) {
             for (int i = 0; i < n; i++) {
                 printProduct(
@@ -414,17 +507,12 @@ public class AppDriver {
             valueLabel
         );
 
+        // Determine the display interval based on the array size
         int interval = n <= 1000 ? 100 : 1000;
 
-        // For more than 1000 products, stop intermediate
-        // output at the 20,000th position.
-        int displayLimit = n > 1000
-                ? Math.min(n - 1, 20000)
-                : n - 1;
-
-        for (int position = interval;
-                position <= displayLimit;
-                position += interval) {
+        // Display every 100th or 1000th element.
+        // Stop before the last element to avoid printing it twice.
+        for (int position = interval; position < n; position += interval) {
 
             printProduct(
                 position + ordinalSuffix(position) + " element:",
@@ -443,7 +531,16 @@ public class AppDriver {
         );
     }
 
-    /* Prints one product and its selected comparison value. */
+    /**
+     * Prints a product with its position, class name,
+     * and selected comparison value.
+     *
+     * @param label The label identifying the product's position.
+     * @param product The product to display.
+     * @param compareType The selected comparison type.
+     * @param valueLabel The description of the displayed value.
+     */
+    
     private static void printProduct(
             String label,
             Products product,
@@ -475,7 +572,20 @@ public class AppDriver {
         );
     }
 
-    /* Returns the ordinal suffix for a positive integer. */
+/**
+ * Determines the ordinal suffix for a positive integer.
+ *
+ * Used when displaying the position of sorted products,
+ * such as 1-st, 2-nd, 3-rd, or 4-th.
+ *
+ * Handles the special cases of numbers ending in
+ * 11, 12, or 13, which all use the "-th" suffix.
+ *
+ * @param number The positive integer being formatted.
+ * @return The appropriate ordinal suffix (-st, -nd,
+ *         -rd, or -th).
+ */
+
     private static String ordinalSuffix(int number) {
 
         int lastTwoDigits = number % 100;

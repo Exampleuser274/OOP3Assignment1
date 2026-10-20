@@ -2,6 +2,17 @@ package utilities;
 
 import java.util.Comparator;
 
+/**
+ * Implements the Quick Sort algorithm using Median-of-Three
+ * pivot selection.
+ *
+ * Sorts arrays in descending order according to the
+ * supplied Comparator.
+ *
+ * Uses recursion to divide and sort smaller partitions
+ * of the original array.
+ */
+
 public class QuickSort {
 	
 	/**
@@ -9,6 +20,7 @@ public class QuickSort {
      *
      * @param array The array of objects to sort
      * @param comparator Determines how objects are compared
+     * @param <T> The type of elements being sorted.
      */
 	
 	public static <T> void sort(T[] array, Comparator<? super T> comparator) {
@@ -18,7 +30,24 @@ public class QuickSort {
 		}
 	}
 	
-	// Recursively sorts the left and right partitions
+	/**
+	 * Recursively sorts sections of the array in descending order
+	 * using the Quick Sort algorithm.
+	 *
+	 * Divides the array around a selected pivot and recursively
+	 * sorts the elements on either side of that pivot.
+	 *
+	 * Recursion stops when the current section contains
+	 * zero or one element.
+	 *
+	 * @param <T> The type of elements being sorted.
+	 * @param array The array containing the elements to sort.
+	 * @param low The starting index of the current section.
+	 * @param high The ending index of the current section.
+	 * @param comparator Determines how elements are compared
+	 *                   during sorting.
+	 */
+	
 	private static <T> void quickSort(T[] array, int low, int high, Comparator<? super T> comparator) {
 		
 		// Stops when the section has 0 or one element
@@ -35,10 +64,26 @@ public class QuickSort {
 		}
 	}
 	
+
 	/**
-     * Selects the median of the first, middle and last elements.
-     * Places the selected pivot at the end of the section.
-     */
+	 * Selects the median of three elements to use as the Quick Sort pivot.
+	 *
+	 * Compares the first, middle, and last elements of the current
+	 * array section using the supplied Comparator.
+	 *
+	 * The three elements are arranged in descending order,
+	 * placing the median at the middle index.
+	 *
+	 * The median is then swapped with the last element so
+	 * that the partition method can use it as the pivot.
+	 *
+	 * @param <T> The type of elements being sorted.
+	 * @param array The array containing the elements.
+	 * @param low The starting index of the current section.
+	 * @param high The ending index of the current section.
+	 * @param comparator Determines how elements are compared.
+	 */
+
 	private static <T> void medianOfThree(T[] array, int low, int high, Comparator<? super T> comparator) {
 		
 		// Find the middle index without adding low and high directly.
@@ -63,10 +108,19 @@ public class QuickSort {
 	}
 	
 	/**
-     * Partitions the array in descending order.
-     *
-     * @return The final position of the pivot
-     */
+	 * Partitions a section of the array around a pivot selected
+	 * using Median-of-Three when at least three elements exist.
+	 *
+	 * Places elements greater than the pivot on the left
+	 * and smaller or equal elements on the right.
+	 *
+	 * @param <T> The type of elements being sorted.
+	 * @param array The array being partitioned.
+	 * @param low The starting index of the partition.
+	 * @param high The ending index of the partition.
+	 * @param comparator Determines the ordering of elements.
+	 * @return The final index of the pivot after partitioning.
+	 */
 	
 	private static <T> int partition(T[] array, int low, int high, Comparator<? super T> comparator) {
 		
@@ -98,13 +152,18 @@ public class QuickSort {
         return i + 1;
     }
     
-    /**
-     * Swaps two elements in an array.
-     *
-     * @param array The array containing the elements.
-     * @param first Index of the first element.
-     * @param second Index of the second element.
-     */
+	/**
+	 * Swaps two elements within an array.
+	 *
+	 * Uses a temporary variable to preserve the first element
+	 * while exchanging the values at the specified indexes.
+	 *
+	 * @param <T> The type of elements contained in the array.
+	 * @param array The array containing the elements.
+	 * @param first The index of the first element.
+	 * @param second The index of the second element.
+	 */
+	
     private static <T> void swap(T[] array, int first, int second) {
 
     	// Save the first element in a temporary Variable

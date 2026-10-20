@@ -5,6 +5,24 @@ import products.Products;
 
 /** Sorts products in descending order using Selection Sort. */
 public class SelectionSort {
+
+	/**
+	 * Sorts an array of products in descending order
+	 * using the Selection Sort algorithm.
+	 *
+	 * Searches the unsorted portion of the array to find
+	 * the largest product according to the Comparator.
+	 *
+	 * The largest product is then swapped into the next
+	 * available position in the sorted portion.
+	 *
+	 * This process repeats until the entire array is sorted.
+	 *
+	 * @param products The array of products to be sorted.
+	 * @param comparator Determines how products are compared
+	 *        when finding the largest value.
+	 */
+
     public static void sort(
             Products[] products,
             Comparator<Products> comparator) {

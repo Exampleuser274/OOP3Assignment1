@@ -5,6 +5,25 @@ import products.Products;
 
 /** Sorts products in descending order using Heap Sort. */
 public class HeapSort {
+	
+	/**
+	 * Sorts an array of products in descending order
+	 * using the Heap Sort algorithm.
+	 *
+	 * First organizes the products into a min-heap,
+	 * where the smallest product is located at the root.
+	 *
+	 * The smallest product is repeatedly swapped with
+	 * the last element of the remaining heap.
+	 *
+	 * After each swap, the heap is reduced in size and
+	 * heapify() restores the min-heap property.
+	 *
+	 * @param products The array of products to be sorted.
+	 * @param comparator Determines how products are compared
+	 *                   when constructing and maintaining the heap.
+	 */
+	
 	public static void sort(
             Products[] products,
             Comparator<Products> comparator) {
@@ -28,7 +47,26 @@ public class HeapSort {
         }
     }
 
-    /** Restores the min-heap property in the given subtree. */
+
+	/**
+	 * Restores the min-heap property within a subtree.
+	 *
+	 * Compares the current root with its left and right
+	 * children to determine which contains the smallest
+	 * product according to the supplied Comparator.
+	 *
+	 * If a child is smaller than the root, the two products
+	 * are swapped and heapify() is called recursively on
+	 * the affected subtree.
+	 *
+	 * @param products The array containing the heap.
+	 * @param heapSize The number of elements currently
+	 *                 included in the heap.
+	 * @param root The index of the subtree's root.
+	 * @param comparator Determines how products are compared
+	 *                   when identifying the smallest element.
+	 */
+
     private static void heapify(
             Products[] products,
             int heapSize,

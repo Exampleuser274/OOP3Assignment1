@@ -14,7 +14,11 @@ public abstract class Products implements Comparable<Products> {
 
     // Prices shared by all types of products.
 	// We make these private because we dont want other external classes to modify these accidentally 
+	
+	/** The original price of the product. */
     private double originalPrice;
+    
+    /** The updated price of the product. */
     private double updatedPrice;
 
     /**

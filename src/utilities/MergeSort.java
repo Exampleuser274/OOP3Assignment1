@@ -4,8 +4,37 @@ import java.util.Comparator;
 
 import products.Products;
 
+/**
+ * Implements the Merge Sort algorithm to arrange Products
+ * objects in descending order.
+ *
+ * Uses a divide-and-conquer approach to recursively
+ * divide the array into smaller sections and merge
+ * them back together in sorted order.
+ *
+ * A Comparator determines whether products are sorted
+ * by original price, updated price, or calculated
+ * real difference.
+ */
+
 public class MergeSort {
-	//this method splits the input array into smaller arrays until each only contains one product, then builds back up and calls merge each time to sort the smaller arrays
+	
+	/**
+	 * Sorts an array of products in descending order
+	 * using the Merge Sort algorithm.
+	 *
+	 * Uses a divide-and-conquer approach by recursively
+	 * splitting the array into smaller sections until
+	 * each section contains only one product.
+	 *
+	 * The smaller sections are then merged back together
+	 * in descending order using the supplied Comparator.
+	 *
+	 * @param products The array of products to be sorted.
+	 * @param comparator Determines how products are compared
+	 *                   during the sorting process.
+	 */
+
 	public static void sort(Products[] products, Comparator<Products> comparator) {
 		
 		//assigns length of the array to an int (saves on writing code)
@@ -14,7 +43,6 @@ public class MergeSort {
 		if (n < 2) {
 			return;
 		}//end of length check
-		
 		
 		//creates 2 arrays with half the size of the input and populates them with one half of the objects
 		int mid = n / 2;
@@ -33,7 +61,23 @@ public class MergeSort {
 	    merge(products,l,r,comparator);
 	}//end of sort method
 	
-	//this method merges two of the smaller arrays back together and sorts them based on the supplied comparator
+	/**
+	 * Merges two sorted product arrays into one array
+	 * in descending order.
+	 *
+	 * Compares the next available product from each array
+	 * and places the greater product into the original array.
+	 *
+	 * Once one array has been fully processed, any remaining
+	 * products from the other array are copied over.
+	 *
+	 * @param original The array that receives the merged products.
+	 * @param l The sorted left portion of the array.
+	 * @param r The sorted right portion of the array.
+	 * @param comparator Determines how products are compared
+	 *                   when merging the two arrays.
+	 */
+
 	public static void merge(Products[] original, Products[] l,Products[] r, Comparator<Products> comparator) {
 		int i = 0, j = 0, k = 0,left = l.length,right=r.length;
 		/*while both smaller arrays still have unsorted values, compares the first unsorted value of each array
