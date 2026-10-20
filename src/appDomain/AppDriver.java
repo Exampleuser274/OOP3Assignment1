@@ -3,7 +3,7 @@
  * CPRG 304 - Object-Oriented Programming 3
  * Assignment 1: Complexity and Sorting
  *
- * Group Members:
+ * Team Sidon Group Members:
  * Patrick Bouley
  * Alexander Kovach
  * Rnel Gem Macatuno
@@ -260,18 +260,17 @@ public class AppDriver {
 	            elapsedMilliseconds );
     }
 
-
-/**
- * Returns the full name of the selected sorting algorithm.
- *
- * Converts the single-character sorting option into a
- * readable name for displaying the benchmark results.
- *
- * @param sortAlgorithm The selected sorting option
- *                      (b, i, s, m, q, or z).
- * @return The name of the selected sorting algorithm,
- *         or "Unknown Sort" if the option is not recognized.
- */
+	/**
+	 * Returns the full name of the selected sorting algorithm.
+	 *
+	 * Converts the single-character sorting option into a
+	 * readable name for displaying the benchmark results.
+	 *
+	 * @param sortAlgorithm The selected sorting option
+	 *                      (b, i, s, m, q, or z).
+	 * @return The name of the selected sorting algorithm,
+	 *         or "Unknown Sort" if the option is not recognized.
+	 */
 
     private static String getAlgorithmName(String sortAlgorithm) {
         switch (sortAlgorithm) {
@@ -398,23 +397,22 @@ public class AppDriver {
         }
     }
 
-
-/**
- * Creates a product object based on the product type
- * provided in the input file.
- *
- * Uses a switch statement to determine which of the
- * seven product subclasses should be instantiated.
- * The product type comparison is case-insensitive.
- *
- * @param type The product type read from the file.
- * @param originalPrice The original price of the product.
- * @param updatedPrice The updated price of the product.
- * @return A Products object representing the appropriate
- *         product subclass.
- * @throws IllegalArgumentException If the product type
- *                                  is not recognized.
- */
+	/**
+	 * Creates a product object based on the product type
+	 * provided in the input file.
+	 *
+	 * Uses a switch statement to determine which of the
+	 * seven product subclasses should be instantiated.
+	 * The product type comparison is case-insensitive.
+	 *
+	 * @param type The product type read from the file.
+	 * @param originalPrice The original price of the product.
+	 * @param updatedPrice The updated price of the product.
+	 * @return A Products object representing the appropriate
+	 *         product subclass.
+	 * @throws IllegalArgumentException If the product type
+	 *                                  is not recognized.
+	 */
 
     private static Products createProduct(
             String type,
@@ -572,19 +570,19 @@ public class AppDriver {
         );
     }
 
-/**
- * Determines the ordinal suffix for a positive integer.
- *
- * Used when displaying the position of sorted products,
- * such as 1-st, 2-nd, 3-rd, or 4-th.
- *
- * Handles the special cases of numbers ending in
- * 11, 12, or 13, which all use the "-th" suffix.
- *
- * @param number The positive integer being formatted.
- * @return The appropriate ordinal suffix (-st, -nd,
- *         -rd, or -th).
- */
+	/**
+	 * Determines the ordinal suffix for a positive integer.
+	 *
+	 * Used when displaying the position of sorted products,
+	 * such as 1-st, 2-nd, 3-rd, or 4-th.
+	 *
+	 * Handles the special cases of numbers ending in
+	 * 11, 12, or 13, which all use the "-th" suffix.
+	 *
+	 * @param number The positive integer being formatted.
+	 * @return The appropriate ordinal suffix (-st, -nd,
+	 *         -rd, or -th).
+	 */
 
     private static String ordinalSuffix(int number) {
 
