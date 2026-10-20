@@ -64,6 +64,7 @@ public class AppDriver {
 	 */
 	
     public static void main(String[] args) {
+    	// run the application and display an error if something goes wrong
         try {
             runApplication(args);
         } catch (IllegalArgumentException | IOException e) {
@@ -90,6 +91,7 @@ public class AppDriver {
     private static void runApplication(String[] args)
             throws IOException {
 
+    	// store the file path, comparison type and sorting algorithm 
         String fileName = null;
         String compareType = null;
         String sortAlgorithm = null;
@@ -115,12 +117,14 @@ public class AppDriver {
                 value = value.substring(1, value.length() - 1);
             }
 
+            // display an error for what argument has an invalid option
             if (value.isEmpty()) {
                 throw new IllegalArgumentException(
                     "Missing value for option: " + arg
                 );
             }
 
+            // store each command line argument in the correct variables
             switch (option) {
                 case "f":
                     if (fileName != null) {
@@ -187,6 +191,7 @@ public class AppDriver {
         // Choose the comparison rule.
         Comparator<Products> comparator;
 
+        // A switch case to determine what comparator we want our methods to sort by
         switch (compareType) {
             case "o":
                 comparator = new OriginalPriceComparator();
@@ -241,8 +246,10 @@ public class AppDriver {
                 );
         }
 
+        // the end of the sorting time, We dont need the display time to be added to it
         long endTime = System.nanoTime();
 
+        // convert the elapsed time from nanoseconds to milliseconds
         double elapsedMilliseconds =
             (endTime - startTime) / 1_000_000.0;
 
@@ -305,6 +312,7 @@ public class AppDriver {
     private static Products[] readProducts(String fileName)
             throws IOException {
 
+    	// this is to open the file and automatically close it when we are finished
         try (BufferedReader reader =
                 Files.newBufferedReader(Path.of(fileName))) {
 
@@ -316,6 +324,7 @@ public class AppDriver {
                 );
             }
 
+            // Read the number of products from the first line
             int count;
 
             try {
@@ -332,8 +341,10 @@ public class AppDriver {
                 );
             }
 
+            // Create an Array large enough to hold all the products
             Products[] products = new Products[count];
 
+            // Read each product and store it in the array
             for (int i = 0; i < count; i++) {
 
                 String line = reader.readLine();
@@ -345,6 +356,7 @@ public class AppDriver {
                     );
                 }
 
+                // Separate the product type and its two prices
                 String[] parts = line.trim().split("\\s+");
 
                 if (parts.length != 3) {
@@ -419,6 +431,7 @@ public class AppDriver {
             double originalPrice,
             double updatedPrice) {
 
+    	// Create the correct product subclass based on its type
         switch (type.toLowerCase(Locale.ROOT)) {
             case "jeans":
                 return new Jeans(originalPrice, updatedPrice);
@@ -472,6 +485,7 @@ public class AppDriver {
 
         String valueLabel;
 
+        // Select the label for the value being displayed
         switch (compareType) {
             case "o":
                 valueLabel = "Original Price:";
@@ -485,6 +499,7 @@ public class AppDriver {
                 valueLabel = "Real Difference:";
         }
         
+        // Display every product when the array contains 10 or fewer items
         if (n <= 10) {
             for (int i = 0; i < n; i++) {
                 printProduct(
@@ -547,6 +562,7 @@ public class AppDriver {
 
         double value;
 
+        // Get the value that was used to sort the products
         switch (compareType) {
             case "o":
                 value = product.getOriginalPrice();
@@ -560,6 +576,7 @@ public class AppDriver {
                 value = product.calcRealDiff();
         }
 
+        // This is to print the product information in aligned columns
         System.out.printf(
             Locale.ROOT,
             "%-20s %-25s %-25s %.2f%n",
@@ -574,24 +591,25 @@ public class AppDriver {
 	 * Determines the ordinal suffix for a positive integer.
 	 *
 	 * Used when displaying the position of sorted products,
-	 * such as 1-st, 2-nd, 3-rd, or 4-th.
+	 * such as 1st, 2nd, 3rd, or 4th.
 	 *
 	 * Handles the special cases of numbers ending in
-	 * 11, 12, or 13, which all use the "-th" suffix.
+	 * 11, 12, or 13, which all use the "th" suffix.
 	 *
 	 * @param number The positive integer being formatted.
-	 * @return The appropriate ordinal suffix (-st, -nd,
-	 *         -rd, or -th).
+	 * @return The appropriate ordinal suffix (st, nd, rd, or th).
 	 */
 
     private static String ordinalSuffix(int number) {
 
+    	// Check the last two digits for special cases
         int lastTwoDigits = number % 100;
 
         if (lastTwoDigits >= 11 && lastTwoDigits <= 13) {
             return "th";
         }
 
+        // Just determines the suffix of the final digit
         switch (number % 10) {
             case 1:
                 return "st";
