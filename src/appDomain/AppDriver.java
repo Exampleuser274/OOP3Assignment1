@@ -591,21 +591,21 @@ public class AppDriver {
         int lastTwoDigits = number % 100;
 
         if (lastTwoDigits >= 11 && lastTwoDigits <= 13) {
-            return "-th";
+            return "th";
         }
 
         switch (number % 10) {
             case 1:
-                return "-st";
+                return "st";
 
             case 2:
-                return "-nd";
+                return "nd";
 
             case 3:
-                return "-rd";
+                return "rd";
 
             default:
-                return "-th";
+                return "th";
         }
     }
 }
