@@ -1,6 +1,7 @@
 package utilities;
 
 import java.util.Comparator;
+import products.Products;
 
 /**
  * Implements the Quick Sort algorithm using Median-of-Three
@@ -20,10 +21,9 @@ public class QuickSort {
      *
      * @param array The array of objects to sort
      * @param comparator Determines how objects are compared
-     * @param <T> The type of elements being sorted.
      */
 	
-	public static <T> void sort(T[] array, Comparator<? super T> comparator) {
+	public static void sort(Products[] array, Comparator<Products> comparator) {
 		
 		if (array.length > 1) {
 			quickSort(array, 0, array.length - 1, comparator);
@@ -40,7 +40,6 @@ public class QuickSort {
 	 * Recursion stops when the current section contains
 	 * zero or one element.
 	 *
-	 * @param <T> The type of elements being sorted.
 	 * @param array The array containing the elements to sort.
 	 * @param low The starting index of the current section.
 	 * @param high The ending index of the current section.
@@ -48,7 +47,7 @@ public class QuickSort {
 	 *                   during sorting.
 	 */
 	
-	private static <T> void quickSort(T[] array, int low, int high, Comparator<? super T> comparator) {
+	private static void quickSort(Products[] array, int low, int high, Comparator<Products> comparator) {
 		
 		// Stops when the section has 0 or one element
 		if (low < high) {
@@ -77,14 +76,13 @@ public class QuickSort {
 	 * The median is then swapped with the last element so
 	 * that the partition method can use it as the pivot.
 	 *
-	 * @param <T> The type of elements being sorted.
 	 * @param array The array containing the elements.
 	 * @param low The starting index of the current section.
 	 * @param high The ending index of the current section.
 	 * @param comparator Determines how elements are compared.
 	 */
 
-	private static <T> void medianOfThree(T[] array, int low, int high, Comparator<? super T> comparator) {
+	private static void medianOfThree(Products[] array, int low, int high, Comparator<Products> comparator) {
 		
 		// Find the middle index without adding low and high directly.
 		int middle = low + (high - low) / 2;
@@ -114,7 +112,6 @@ public class QuickSort {
 	 * Places elements greater than the pivot on the left
 	 * and smaller or equal elements on the right.
 	 *
-	 * @param <T> The type of elements being sorted.
 	 * @param array The array being partitioned.
 	 * @param low The starting index of the partition.
 	 * @param high The ending index of the partition.
@@ -122,14 +119,14 @@ public class QuickSort {
 	 * @return The final index of the pivot after partitioning.
 	 */
 	
-	private static <T> int partition(T[] array, int low, int high, Comparator<? super T> comparator) {
+	private static int partition(Products[] array, int low, int high, Comparator<Products> comparator) {
 		
 		// Use Median-of-Three when there are at least 3 elements.
 		if (high - low >= 2) {
 		    medianOfThree(array, low, high, comparator);
 		}
         
-        T pivot = array[high];
+        Products pivot = array[high];
         
         // Tracks the boundary of values greater than the pivot.
         int i = low - 1;
@@ -158,16 +155,15 @@ public class QuickSort {
 	 * Uses a temporary variable to preserve the first element
 	 * while exchanging the values at the specified indexes.
 	 *
-	 * @param <T> The type of elements contained in the array.
 	 * @param array The array containing the elements.
 	 * @param first The index of the first element.
 	 * @param second The index of the second element.
 	 */
 	
-    private static <T> void swap(T[] array, int first, int second) {
+    private static void swap(Products[] array, int first, int second) {
 
     	// Save the first element in a temporary Variable
-        T temp = array[first];
+        Products temp = array[first];
         
         // Copy the second element into the first elements position
         array[first] = array[second];
